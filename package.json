@@ -1,0 +1,25 @@
+{
+  "name": "invdrive-backend",
+  "version": "1.0.0",
+  "description": "The backend services of the InvDrive app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Faruq Ayomide",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "connect-mongodb-session": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.0",
+    "mongoose": "^8.8.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
+}
