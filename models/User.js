@@ -24,7 +24,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  habitTokens: {
+    type: Number,
+    default: 15000,
+  },
 });
 
 //  exporting the model
-export default mongoose.model("User", userSchema);
+export default mongoose.model("user", userSchema);

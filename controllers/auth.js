@@ -12,9 +12,7 @@ export async function signUp(req, res, next) {
     // console.log(errors);
 
     if (errors.length > 0) {
-      return res
-        .status(400)
-        .json({ message: "Invalid input", errors: errors, statusCode: 400 });
+      return res.status(400).json({ message: errors[0].msg, statusCode: 400 });
     }
 
     const { firstName, lastName, email, password } = req.body;
@@ -39,4 +37,3 @@ export async function signUp(req, res, next) {
     next(error);
   }
 }
-

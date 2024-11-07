@@ -10,6 +10,7 @@ import bcrypt from "bcrypt";
 
 // importing custom modules
 import authRoutes from "./routes/auth.js";
+import adminRoutes from "./routes/admin.js";
 import User from "./models/user.js";
 
 // creating express app
@@ -48,6 +49,7 @@ app.use(passport.session());
 
 // setting up the routes
 app.use("/auth", authRoutes);
+app.use("/admin", adminRoutes);
 
 // setting up the 404 error handler
 app.use((req, res, next) => {
