@@ -6,7 +6,7 @@ import User from "../models/user.js";
 
 export async function putHabit(req, res, next) {
   try {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated) {
       const { errors } = validationResult(req);
       const { habit, days, startTime, endTime, note } = req.body;
       if (errors.length > 0) {
@@ -52,9 +52,40 @@ export async function putHabit(req, res, next) {
   }
 }
 
+export async function getTodayHabits(req, res, next) {
+  try {
+    if (req.isAuthenticated) {
+      const day = new Date().getDay();
+
+      // getting all the habits of the user
+      const habits = await Habit.find({ userId: req.user._id });
+
+      // getting the habits that are to be done today
+      const todayHabits = habits.filter((habit) => {
+        if (habit.days.includes(day)) {
+          return habit;
+        }
+      });
+
+      return res.status(200).json({
+        message: "Today's habit fetched sucessfully",
+        habits: todayHabits,
+        statusCode: 200,
+      });
+    }
+
+    //   sending the response to the client if the user is not authenticated
+    return res
+      .status(401)
+      .json({ message: "User is not authenticated", statusCode: 401 });
+  } catch (error) {
+    next(error);
+  }
+}
+
 export async function getAllHabits(req, res, next) {
   try {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated) {
       const habits = await Habit.find({ userId: req.user._id });
       return res.status(200).json({ habits: habits, statusCode: 200 });
     }
@@ -69,7 +100,7 @@ export async function getAllHabits(req, res, next) {
 
 export async function deleteHabit(req, res, next) {
   try {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated) {
       const habitId = req.params.habitId;
 
       // checking if the habit exists and belongs to the user
@@ -107,7 +138,7 @@ export async function deleteHabit(req, res, next) {
 
 export async function postCheckHabit(req, res, next) {
   try {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated) {
       const habitId = req.params.habitId;
 
       // checking if the habit exists and belongs to the user

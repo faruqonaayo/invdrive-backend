@@ -24,6 +24,9 @@ router.put(
   adminControllers.putHabit
 );
 
+// this route is used to get today's habits
+router.get("/todayHabits", adminControllers.getTodayHabits);
+
 // this route is used to get all the habits of a user
 router.get("/allHabits", adminControllers.getAllHabits);
 
