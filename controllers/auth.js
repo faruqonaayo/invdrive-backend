@@ -73,11 +73,18 @@ export async function postLogin(req, res, next) {
     });
 
     // console.log(token);
+    const dataToBeSent = {
+      firstName: userExists.firstName,
+      lastName: userExists.lastName,
+      email: userExists.email,
+      habitTokens: userExists.habitTokens,
+    };
 
     return res.status(200).json({
       message: "Login successful",
       token: token,
       statusCode: 200,
+      user: dataToBeSent,
     });
   } catch (error) {
     next(error);
@@ -86,9 +93,18 @@ export async function postLogin(req, res, next) {
 
 export function checkAuth(req, res, next) {
   if (req.user) {
-    return res
-      .status(200)
-      .json({ message: "User is authenticated", statusCode: 200 });
+    const dataToBeSent = {
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      email: req.user.email,
+      habitTokens: req.user.habitTokens,
+    };
+
+    return res.status(200).json({
+      message: "User is authenticated",
+      statusCode: 200,
+      user: dataToBeSent,
+    });
   }
   return res
     .status(401)
