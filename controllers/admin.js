@@ -1,7 +1,7 @@
 // import 3rd party modules
 import { validationResult } from "express-validator";
 // import custom modules
-import Habit from "../models/Habit.js";
+import Habit from "../models/habit.js";
 import User from "../models/user.js";
 
 export async function putHabit(req, res, next) {
