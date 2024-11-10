@@ -55,7 +55,9 @@ export async function putHabit(req, res, next) {
 export async function getTodayHabits(req, res, next) {
   try {
     if (req.isAuthenticated) {
-      const day = new Date().getDay();
+      // getting the day from the query
+      // if the day is not provided, the machine current day is used
+      const day = req.query.day ? req.query.day : new Date().getDay();
 
       // getting all the habits of the user
       const habits = await Habit.find({ userId: req.user._id });
