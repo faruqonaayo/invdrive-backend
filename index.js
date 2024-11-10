@@ -59,6 +59,11 @@ app.use(async (req, res, next) => {
   next();
 });
 
+// get "/"
+app.get("/", (req, res, next) => {
+  res.status(200).send("<h1>Api is Running</h1>");
+});
+
 // setting up the routes
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
