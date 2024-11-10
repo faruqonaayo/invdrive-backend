@@ -61,11 +61,7 @@ export async function getTodayHabits(req, res, next) {
       const habits = await Habit.find({ userId: req.user._id });
 
       // getting the habits that are to be done today
-      const todayHabits = habits.filter((habit) => {
-        if (habit.days.includes(day)) {
-          return habit;
-        }
-      });
+      const todayHabits = habits.filter((habit) => habit.days.includes(day));
 
       return res.status(200).json({
         message: "Today's habit fetched sucessfully",
